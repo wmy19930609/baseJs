@@ -34,10 +34,9 @@
     
     <script src="jquery-1.11.3.js"></script>
     <script>
-		var $nav = $('.nav');
+	var $nav = $('.nav');
         var $win = $(window);
         var offsetT = $('.nav').offset().top;
-        
 		$nav.css({
 			'position' : '-webkit-sticky',
 			'top' : 0
