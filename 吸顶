@@ -1,0 +1,61 @@
+//吸顶功能实现，手机和pc端都可以
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>吸顶</title>
+    <style>
+        /*  注： position: fixed是针对窗口而不是针对body的      */
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .header{
+            width: 100%;
+            height: 100px;
+            background: #f69;
+        }
+        .nav{
+            width: 100%;
+            height: 50px;
+            background-color: pink;
+        }
+        .content{
+            width: 100%;
+            height: 800px;
+            background: yellowgreen;
+        }
+    </style>
+</head>
+<body>
+    <div class="header"></div>
+    <div class="nav"></div>
+    <div class="content"></div>
+    
+    <script src="jquery-1.11.3.js"></script>
+    <script>
+		var $nav = $('.nav');
+        var $win = $(window);
+        var offsetT = $('.nav').offset().top;
+        
+		$nav.css({
+			'position' : '-webkit-sticky',
+			'top' : 0
+		});
+		
+		if(!($nav.css('position')).match('sticky')){
+			$win.on('scroll',function (){ 
+				if(offsetT < $win.scrollTop()){
+					$nav.css({
+						'position' : 'fixed',
+						'top' : 0
+					})
+				}else{
+					$nav.css('position','static')
+				}
+			})
+		}
+    
+    </script>
+</body>
+</html>
