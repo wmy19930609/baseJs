@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>random</title>
+	<style>
+		#num{
+			width: 35px;
+			height: 35px;
+			font-size: 34px;
+			text-align: center;
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<input type="button" value="开始" />
+	<div id="num"></div>
+
+	<script>
+		function $(selector){
+			return document.querySelector(selector);
+		}
+		var btn = $('input');
+		var div = $('#num');
+		var flag = false;
+		var count = 0;
+
+    btn.onclick = function(){
+    	var timer = setInterval(function(){
+    		startRandom();
+    		if(count >= 10){
+    			clearInterval(timer);
+    		}
+    	}, 500);
+    };
+
+    function startRandom(){
+    	count ++;
+  		if(flag){
+  			div.innerText = 5;
+  			flag = false;
+  		}else{
+  			div.innerText = 6;
+  			flag = true;
+  		}
+    }
+
+	</script>
+</body>
+</html>
