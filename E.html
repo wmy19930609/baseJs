@@ -1,0 +1,61 @@
+<script>
+		var emitter = document.getElementById('emitter');
+		var events = {};
+
+		events.on = function(evtName, callback){
+			this[evtName] = [];
+			this[evtName].push(callback);
+		};
+
+		events.emit = function(evtName, args){
+			var _this = this;//这种情况只有在ajax中常见，不常用的地方就不用先把this存储下来
+			var fnQueue = _this[evtName];
+			for(var fname in _this){
+				if(evtName == fname){
+					for(var i = 0; i < fnQueue.length; i++){
+						fnQueue[i](args);
+					}
+				}
+			}
+		};
+
+		events.once = function(evtName,args){
+			this.emit(evtName, args);
+			delete this[evtName];
+
+			//换一种
+			// this.on(evtName,callback);
+	  //       this.on(evtName,function() {
+	  //           E.off(evtName);
+	  //       });
+		};
+
+		events.on('getImgs',function(data){
+			console.log(data);
+		});
+
+		events.on('conn',function(){
+			console.log('conn');
+		});
+		emitter.onclick = function(){
+			events.emit('getImgs','1.png');
+			events.emit('getImgs','5.png');
+			// events.once('conn','connected');
+		}
+
+
+
+		if(fns.length > 1){//多个
+			for(var i = 0; i < fns.length; i++){
+				allExec = allExec && this[fns[i]].isExcu;
+			}
+			
+			if(allExec){
+				this[evtName] = this[evtName] || [];
+				this[evtName].push(callback);
+			}
+		}else{
+			this[evtName] = this[evtName] || [];
+			this[evtName].push(callback);
+		}
+	</script>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>slideDoor</title>
+	<style>
+		.container{
+			position: relative;
+			margin: 0 auto;
+		}
+		img{
+			position: absolute;
+			border-right: 1px solid #ccc;
+			border-bottom: 1px solid #ccc;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<img src="./images/door1.png" alt="">
+		<img src="./images/door2.png" alt="">
+		<img src="./images/door3.png" alt="">
+		<img src="./images/door4.png" alt="">
+	</div>
+
+	<script>
+	//window.onload的影响
+		window.onload = function(){
+			var container = document.getElementsByClassName('container')[0];
+			var imgs = document.getElementsByTagName('img');
+			var imgWidth = imgs[0].offsetWidth;
+			var imgHeight = imgs[0].offsetHeight;
+			var exposeWidth = 160;
+			var transWidth = imgWidth - exposeWidth;
+
+			container.width = imgWidth + (imgs.length - 1) * 160 + 'px';
+
+			function setImgsPos() {
+				for (var i = 1, len = imgs.length; i < len; i++) {
+					imgs[i].style.left = imgWidth + exposeWidth * (i - 1) + 'px';
+				}
+			}
+			setImgsPos();
+
+			for(var i = 0; i < imgs.length; i++){
+				imgs[i].style.left = imgWidth + (i - 1) * exposeWidth + 'px';
+
+				(function(i){
+					imgs[i].onmouseover = function(){
+						setImgsPos();
+
+						for(var j = 1; j < i; j++){
+							imgs[j].style.left -= parseInt(imgs[j].style.left) - transWidth + 'px';
+						}
+					}
+				})(i);
+				
+			}
+		}
+		
+
+
+
+	</script>
+</body>
+</html>

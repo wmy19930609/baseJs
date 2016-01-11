@@ -23,9 +23,11 @@
         }
         var startbtn = $('input');
         var num = $('#num');
+        var isDisabled = false;
 
         startbtn.onclick = function(){
-            startRandom([5,6], 5000, 500);
+			if(isDisabled) return;
+			startRandom([5,6], 5000, 500);
         };
 
         function startRandom(arr, time, interval){
@@ -42,6 +44,22 @@
                 }
             }, interval);
         }
+//====================另一种方法==========================
+		function startRan(){
+			var isStop = false;
+			var timer = setInterval(function(){
+				num.innerText = Math.random() > 0.5 ? 6 : 5;
+
+				if(isStop){
+					clearInterval(timer);
+				}
+			}, 500);
+
+			setTimeout(function(){
+				isStop = true;
+			}, 5000);
+		}
+		startRan();
     </script>
 </body>
 </html>

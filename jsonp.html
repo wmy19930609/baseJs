@@ -1,0 +1,71 @@
+<%# head.html%>
+<style>
+    body{
+        text-align: center;
+    }
+    p{
+        margin-top: 20px;
+    }
+</style>
+<h1>JSONP</h1>
+<p>
+    从<a href="http://wmy.fex.fedevot.meilishuo.com/mobBackstage/jsonp/">
+        http://wmy.fex.fedevot.meilishuo.com/mobBackstage/jsonp/
+    </a>
+    去访问
+    <a href="http://wmy.fedevot.meilishuo.com/interconnect/jsonp/">
+        http://wmy.fedevot.meilishuo.com/interconnect/jsonp/
+    </a>
+    获得数据
+</p>
+
+<script>
+    function jsonp(url, callback, opt){
+        var seq = new Date() * 1;
+        var funName = 'jsonp' + seq;
+        var cb = opt.cb || 'callback';
+
+        window[funName] = function(data){
+            if(callback){
+                callback(data);
+            }
+
+           window[funName] = null; 
+        };
+
+        url += (/\?/.test( url ) ? "&" : "?") + cb +'=' + funName;
+        loadJs(url);
+    }
+
+    function loadJs(url, options){
+        var head = document.head || document.getElementsByTagName('head')[0],
+            script = document.createElement('script'),
+            done = false;
+        script.src = url;
+
+        if (options && options.charset) {
+            script.charset = options.charset;
+        }
+        
+        script.onerror = script.onload = script.onreadystatechange = function() {
+            if (!done && (!this.readyState || this.readyState == "loaded" || this.readyState == "complete")) {
+                done = true;
+                script.onerror = script.onload = script.onreadystatechange = null;
+                head.removeChild(script);
+            }
+        };
+        head.insertBefore(script, head.firstChild);
+    }
+
+    function init(){
+        var url = 'http://wmy.fedevot.meilishuo.com/interconnect/jsonp/';
+        
+        jsonp(url, function(person){
+            alert(person.name);
+        }, {'cb': '_callback'});        
+    }
+
+    init();
+</script>
+
+<%# foot.html%>

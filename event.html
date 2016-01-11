@@ -1,0 +1,83 @@
+<script>
+
+	var E = {};
+
+	E.on = function(evtName, callback){
+		var fns = evtName.split(' ');
+		if(fns.length > 0){
+			for(var i = 0; i < fns.length; i++){
+				this[fns[i]] = this[fns[i]] || [];
+				this[fns[i]].push(callback);
+			}
+		}
+	}
+	
+	E.off = function(evtName) {
+		delete this[evtName];
+	}
+
+	E.emit = function(evtName, args){
+		var fnQueue = this[evtName];
+		if(fnQueue){
+			fnQueue.isExcu = true;
+			fnQueue.args = args;
+			for(var i = 0; i < fnQueue.length; i++){
+				fnQueue[i](args);
+			}
+		}
+	};
+
+	E.once = function(evtName, callback){
+		this.on(evtName,callback);
+		this.on(evtName,function() {
+			E.off(evtName);
+		});
+	};
+
+	E.some = function(evts, callback){
+		evts = evts.split(' ');
+		var someExcu = false;
+		var args;
+		for(var i = 0; i < evts.length; i++){
+			if(this[evts[i]]){
+				if(this[evts[i]].isExcu){
+					someExcu = true;
+					args = this[evts[i]].args;
+					break;
+				}
+			}
+		}
+		if(someExcu){
+			callback(args);
+		}
+	};
+
+	E.all = function(evts, callback){
+		evts = evts.split(' ');
+		var allExcu = false;
+		var args = [];
+
+		for(var i = 0; i < evts.length; i++){
+			var eventItem = this[evts[i]];
+			eventItem ? '' : this.on(evts[i], callback);
+
+			if(eventItem.isExcu){
+				allExcu = true;
+			}
+		}
+
+	};
+
+	
+
+	E.all('evt1 evt2 evt3',function (data) {
+		console.log(data);		
+	});
+
+	E.emit('evt2', 'i am evt2!');
+	E.emit('evt3', 'i am evt3!');
+	E.emit('evt1', 'i am evt1!');
+
+</script>
+
+
