@@ -1,0 +1,38 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+ul{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+
+#poster-wrapper{
+    margin: 50px auto;
+    position: relative;
+}
+#poster-wrapper .poster-item{
+    position: absolute;
+}
+#poster-wrapper .poster-item a{
+    display: block;
+}
+
+#poster-wrapper .poster-btn{
+    position: absolute;
+    top: 0;
+    width: 100px;
+    height: 100%;
+    background: rgba(0,0,0,.5);
+    font-size: 40px;
+    color: #fff;
+    z-index: 5;
+}
+#poster-wrapper .poster-prev-btn{
+    left: 0;
+}
+#poster-wrapper .poster-next-btn{
+    right: 0;
+}

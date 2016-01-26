@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div id="poster-wrapper">
+        <ul class="poster-list">
+            <li class="poster-item"><a href="javascript:;"><img src="./img/1.jpg" alt=""></a></li>
+            <li class="poster-item"><a href="javascript:;"><img src="./img/2.jpg" alt=""></a></li>
+            <li class="poster-item"><a href="javascript:;"><img src="./img/3.jpg" alt=""></a></li>
+            <li class="poster-item"><a href="javascript:;"><img src="./img/4.jpg" alt=""></a></li>
+            <li class="poster-item"><a href="javascript:;"><img src="./img/5.jpg" alt=""></a></li>
+        </ul>
+
+        <div class="poster-btn poster-prev-btn"><</div>
+        <div class="poster-btn poster-next-btn">></div>
+    </div>
+    <script src="./jquery.js"></script>
+    <script src="./carousel.js"></script>
+    <script>
+        Carousel.init({
+            wrapper: '#poster-wrapper',
+            setting: {
+                width: 1000,
+                height: 270,
+                speed: 300,
+                posterWidth: 640,
+                posterBtnWidth: 100
+            }
+        });
+    </script>
+
+    <!-- <script src="./superALert.js"></script> -->
+    <!-- <script>
+        $('.poster-wrapper').superAlert({
+            msg : 'xxx-xxx',
+            before : function(msg) {
+                if(msg.indexOf('-') > -1){
+                    return true;
+                }
+                return false;
+            }
+        });
+
+    </script> -->
+</body>
+</html>
