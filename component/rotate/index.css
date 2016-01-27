@@ -9,18 +9,22 @@ a{
     text-decoration: none;
 }
 
-#poster-wrapper{
+.poster-wrapper{
     margin: 50px auto;
     position: relative;
 }
-#poster-wrapper .poster-item{
+.poster-wrapper .poster-item{
     position: absolute;
 }
-#poster-wrapper .poster-item a{
+.poster-wrapper .poster-item a, .poster-item img{
     display: block;
 }
+.poster-item a, .poster-item img{
+    width: 100%;
+    height: 100%;
+}
 
-#poster-wrapper .poster-btn{
+.poster-wrapper .poster-btn{
     position: absolute;
     top: 0;
     width: 100px;
@@ -30,9 +34,9 @@ a{
     color: #fff;
     z-index: 5;
 }
-#poster-wrapper .poster-prev-btn{
+.poster-wrapper .poster-prev-btn{
     left: 0;
 }
-#poster-wrapper .poster-next-btn{
+.poster-wrapper .poster-next-btn{
     right: 0;
 }
