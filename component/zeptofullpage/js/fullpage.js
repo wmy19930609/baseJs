@@ -3,7 +3,7 @@
         parent: '.inner',
         page: '.page',
         duration: 500,
-        dir: 'v'
+        dir: 'h'
     };
 
     function Fullpage($this, conf){
@@ -26,7 +26,11 @@
             var $parent = this.wrapper.find(this.settings.parent);
 
             if(dir == 'h'){
-                $parent.css('width', (this.pagesLength) * (this.wrapper.width()));
+                $page.css('float', 'left');
+                $parent.css({
+                    'width': (this.pagesLength) * (this.wrapper.width()),
+                    'height': this.wrapper.height()
+                });
             }
 
             $page.css({
@@ -54,13 +58,21 @@
                     if(changeY - startY > 0){//下翻
                         index = that.fixIndex(that.curIndex - 1);
                         that.curIndex = index;
-                    }else if(changeY - startY < 0){//上翻
+                    }else{//上翻
                         index = that.fixIndex(that.curIndex + 1);
                         that.curIndex = index;
                     }
                     
                 }else if(that.settings.dir == 'h'){
-
+                    if(changeX - startX > 0){//右翻
+                        index = that.fixIndex(that.curIndex - 1);
+                        console.log(index);
+                        that.curIndex = index;
+                    }else{//左翻
+                        index = that.fixIndex(that.curIndex + 1);
+                        console.log(index);
+                        that.curIndex = index;
+                    }
                 }
 
                 if( that.movingFlag ){
@@ -75,7 +87,7 @@
                 return 0;
             }else if(index >= this.pagesLength){
                 this.movingFlag = false;
-                return this.pagesLength;
+                return this.pagesLength - 1;
             }else{
                 this.movingFlag = true;
                 return index;
@@ -87,7 +99,7 @@
             if(this.settings.dir == 'v'){
                 y = -this.curIndex * this.wrapper.height();
             }else if(this.settings.dir == 'h'){
-                x = this.curIndex * this.wrapper.width();
+                x = -this.curIndex * this.wrapper.width();
             }
 
             $parent.css({
