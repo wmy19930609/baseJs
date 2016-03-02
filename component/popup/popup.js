@@ -10,7 +10,7 @@
         "layer": true,
         "opacity": 0.5,
         "layerBg": "rgba(0,0,0,.5)",
-        "fixed": false
+        "fixed": true
     };
 
     function Popup(box, conf){
@@ -86,7 +86,7 @@
 
             $('body').on('click',function(e){
                 var $target = $(e.target);
-                if(self.show && $target.attr('class') != 'popwin'){
+                if(self.show && !$target.closest('.popwin').length){
                     $('.layer').remove();
                     $('.popwin').remove();
                     self.show = false;
