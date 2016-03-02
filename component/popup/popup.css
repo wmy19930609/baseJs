@@ -1,0 +1,19 @@
+@import url(../base.css);
+
+html, body{
+    height: 100%;
+}
+.layer{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 900;
+}
+.popwin{
+    z-index: 1000;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    background: #fff;
+}

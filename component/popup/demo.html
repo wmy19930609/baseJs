@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>弹窗组件</title>
+    <link rel="stylesheet" href="./popup.css">
+</head>
+<body>
+    <button class="show">全屏弹窗</button>
+    <button class="aside">旁边弹窗(相当于tips)</button>
+
+    <script src="./jquery-2.1.4.js"></script>
+    <script src="./popup.js"></script>
+    <script>
+        $('.show').popup();
+        $('.aside').popup({'aside': true, "layer": false});
+    </script>
+</body>
+</html>
